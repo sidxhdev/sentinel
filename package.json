@@ -1,0 +1,20 @@
+{
+  "name": "sentinel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sentinel Monorepo - ESP32 Intrusion Detection System (Frontend + Backend)",
+  "workspaces": [
+    "sentinel-api",
+    "sentinel-dashboard"
+  ],
+  "scripts": {
+    "dev:api": "cd sentinel-api && vercel dev",
+    "dev:dashboard": "cd sentinel-dashboard && npm run dev",
+    "deploy:api": "cd sentinel-api && vercel --prod",
+    "deploy:dashboard": "cd sentinel-dashboard && vercel --prod"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
