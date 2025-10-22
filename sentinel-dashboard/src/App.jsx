@@ -17,7 +17,7 @@ export default function App() {
       setStatus(res.data);
       setError("");
     } catch (err) {
-      setError("⚠️ Unable to connect to backend");
+      setError("Unable to connect to backend");
     }
   };
 
@@ -49,9 +49,9 @@ export default function App() {
     setLoading(true);
     try {
       const res = await axios.get(`${BACKEND_URL}/api/status`);
-      if (res.status === 200) alert("✅ Backend is reachable and working!");
+      if (res.status === 200) alert("Backend is reachable and working!");
     } catch {
-      alert("❌ Unable to connect to the provided backend URL");
+      alert("Unable to connect to the provided backend URL");
     } finally {
       setLoading(false);
     }
