@@ -8,7 +8,7 @@ export default function DetectionStatus({ status, time }) {
           isIntruder ? "text-red-500" : "text-green-400"
         }`}
       >
-        {isIntruder ? "🚨 Intruder Detected!" : "✅ System Idle"}
+        {isIntruder ? "Intruder Detected!" : "System Idle"}
       </h2>
       <p className="text-gray-400">
         Last Update: {time ? new Date(time).toLocaleString() : "No recent activity"}

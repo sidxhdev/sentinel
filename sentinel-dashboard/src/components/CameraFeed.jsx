@@ -4,7 +4,7 @@ export default function CameraFeed({ streamUrl }) {
 
   return (
     <div className="mt-6">
-      <h3 className="text-lg font-semibold text-blue-400 mb-2">📷 Live Camera Feed</h3>
+      <h3 className="text-lg font-semibold text-blue-400 mb-2">Live Camera Feed</h3>
       <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-gray-700">
         <iframe
           src={streamUrl}
