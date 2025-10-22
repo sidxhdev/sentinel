@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "name": "sentinel-dashboard",
+      "rootDirectory": "sentinel-dashboard"
+    },
+    {
+      "name": "sentinel-api",
+      "rootDirectory": "sentinel-api"
+    }
+  ]
+}
