@@ -56,7 +56,7 @@ export default function App() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <input
               type="text"
-              placeholder="Enter ESP32 or Backend URL (e.g. http://192.168.1.100)"
+              placeholder="Enter Esp32 http address"
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
               className="px-4 py-2 w-80 rounded bg-gray-900 text-gray-200 border border-gray-700 focus:outline-none"
