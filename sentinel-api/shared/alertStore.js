@@ -1,16 +1,23 @@
-// sentinel-api/shared/alertStore.js
+// shared/alertStore.js
 
-// A simple shared in-memory store
-let lastAlert = {
+// Simple in-memory alert store for prototype use
+let latestAlert = {
   status: "idle",
   image: null,
-  time: null
+  time: null,
 };
 
-export function setAlert(newData) {
-  lastAlert = newData;
+// Save alert data (used in /api/alert)
+export function setAlert(status, image) {
+  latestAlert = {
+    status,
+    image,
+    time: new Date().toLocaleString(),
+  };
+  console.log("🔔 Alert updated:", latestAlert);
 }
 
+// Get latest alert (used in /api/status)
 export function getAlert() {
-  return lastAlert;
+  return latestAlert;
 }
