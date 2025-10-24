@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BACKEND_URL = "https://sentinel-backend-nine.vercel.app";
+const BACKEND_URL = "https://sentinel-backend-seven.vercel.app";
+
 
 
 export default function App() {
