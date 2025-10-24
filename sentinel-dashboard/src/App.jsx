@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BACKEND_URL = "https://sentinel-api-omega.vercel.app";
+const BACKEND_URL = "https://sentinel-backend-nine.vercel.app";
+
 
 export default function App() {
   const [esp32Url, setEsp32Url] = useState(localStorage.getItem("esp32Url") || "");
