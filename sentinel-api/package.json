@@ -1,7 +1,15 @@
 {
   "name": "sentinel-api",
   "version": "1.0.0",
+  "description": "Backend API for Sentinel AI (Face Detection)",
+  "main": "server.js",
   "type": "module",
-  "scripts": {},
-  "dependencies": {}
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "ws": "^8.18.0"
+  }
 }

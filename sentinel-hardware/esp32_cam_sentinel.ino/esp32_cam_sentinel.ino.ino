@@ -11,8 +11,18 @@
 #include "camera_pins.h"
 
 // ================= WIFI CREDENTIALS ==============
-const char* ssid = "We go gym";
-const char* password = "siddesh@1903";
+// Multiple WiFi networks - will connect to first available
+struct WiFiNetwork {
+  const char* ssid;
+  const char* password;
+};
+
+WiFiNetwork networks[] = {
+  {"siddesh", "qwerty123"},
+  {"We go gym", "siddesh@1903"}
+};
+
+const int numNetworks = sizeof(networks) / sizeof(networks[0]);
 
 // ================= HTTP SERVER ==================
 static httpd_handle_t stream_httpd = NULL;
@@ -107,10 +117,10 @@ void setup() {
   config.pin_pwdn     = PWDN_GPIO_NUM;
   config.pin_reset    = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
-  config.frame_size   = FRAMESIZE_SVGA;   // 🔹 800x600 - Good quality and speed
+  config.frame_size   = FRAMESIZE_VGA;   // 🔹 640x480 - Good quality and speed
   config.pixel_format = PIXFORMAT_JPEG;
   config.fb_location  = CAMERA_FB_IN_PSRAM;
-  config.jpeg_quality = 8;                // 🔹 Lower = better quality (0–63)
+  config.jpeg_quality = 10;                // 🔹 Lower = better quality (0–63)
   config.fb_count     = 2;
 
   // Initialize camera
@@ -133,19 +143,47 @@ void setup() {
   s->set_hmirror(s, 1);
   s->set_vflip(s, 0);
 
-  // Connect WiFi
-  WiFi.begin(ssid, password);
+  // Connect WiFi - Try all networks
   WiFi.setSleep(false);
-  Serial.print("Connecting to WiFi");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  bool connected = false;
+  
+  for (int i = 0; i < numNetworks && !connected; i++) {
+    Serial.print("Attempting to connect to: ");
+    Serial.println(networks[i].ssid);
+    
+    WiFi.begin(networks[i].ssid, networks[i].password);
+    
+    int attempts = 0;
+    while (WiFi.status() != WL_CONNECTED && attempts < 20) {
+      delay(500);
+      Serial.print(".");
+      attempts++;
+    }
+    
+    if (WiFi.status() == WL_CONNECTED) {
+      connected = true;
+      Serial.println("\n");
+      Serial.println("========================================");
+      Serial.println("✅ WiFi Connected Successfully!");
+      Serial.println("========================================");
+      Serial.print("📶 Network: ");
+      Serial.println(networks[i].ssid);
+      Serial.print("📍 IP Address: ");
+      Serial.println(WiFi.localIP());
+      Serial.print("📷 Stream URL: http://");
+      Serial.print(WiFi.localIP());
+      Serial.println("/stream");
+      Serial.println("========================================");
+    } else {
+      Serial.println("\n❌ Failed to connect to this network");
+      WiFi.disconnect();
+    }
   }
-
-  Serial.println("\n✅ WiFi connected!");
-  Serial.print("📷 Stream available at: http://");
-  Serial.print(WiFi.localIP());
-  Serial.println("/stream");
+  
+  if (!connected) {
+    Serial.println("❌ Could not connect to any WiFi network!");
+    return;
+  }
 
   startCameraServer();
 }
