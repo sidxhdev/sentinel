@@ -8,7 +8,7 @@ from flask import Flask, Response, jsonify
 # ==============================
 # CONFIGURATION
 # ==============================
-ESP32_URL = "http://10.186.71.99/stream"  # 🔹 Change to your ESP32-CAM IP
+ESP32_URL = "http://192.168.1.5/stream"  # 🔹 Change to your ESP32-CAM IP
 API_URL = "http://localhost:3000/face-data"  # 🔹 Node API endpoint
 
 # ==============================
